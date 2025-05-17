@@ -1,0 +1,86 @@
+
+services:
+ mysql-container:
+  image: mysql:8.3.0
+  environment:
+   - MYSQL_ROOT_PASSWORD=mysqlpw
+  ports:
+   - "3306:3306"
+  volumes:
+   - ./mysql-init:/docker-entrypoint-initdb.d
+  networks:
+   - ecommerce-network
+  hostname: mysql-host-productsmicroservice
+
+ products-microservice:
+  image: rbcadaing/ecommerce-products-microservice:v1.0
+  build:
+      context: .
+      dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
+  environment:
+   - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
+  depends_on:
+      - mysql-container
+  ports:
+   - "8080:8080"
+  networks:
+   - ecommerce-network
+
+
+ postgres-container:
+  image: postgres:16.1
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=postgrespw
+   - POSTGRES_DB=eCommerceUsers
+  ports:
+   - "5432:5432"
+  volumes:
+   - ./postgres-init:/docker-entrypoint-initdb.d
+  networks:
+   - ecommerce-network
+
+ users-microservice:
+  image: rbcadaing/ecommerce-users-microservice:v1.0
+  build:
+      context: .
+      dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
+  environment:
+   - ConnectionStrings__PostgresConnection=Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=postgrespw;
+  depends_on:
+      - postgres-container
+  ports:
+   - "9090:9090"
+  networks:
+   - ecommerce-network
+
+ mongodb-container:
+  image: mongo
+  restart: always
+  environment:
+   - MONGO_INITDB_ROOT_USERNAME=root
+   - MONGO_INITDB_ROOT_PASSWORD=mongopw
+  ports:
+   - "27017:27017"
+  volumes:
+   - ./mongo-init:/docker-entrypoint-initdb.d
+  networks:
+   - ecommerce-network
+
+ orders-microservice:
+  image: rbcadaing/ecommerce-orders-microservice:v1.0
+  build:
+      context: .
+      dockerfile: eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile
+  environment:
+   - ConnectionStrings__MongoDB=mongodb://root:mongopw@mongodb-container
+  depends_on:
+      - mongodb-container
+  ports:
+   - "9091:8080"
+  networks:
+   - ecommerce-network
+
+networks:
+ ecommerce-network:
+  driver: bridge
