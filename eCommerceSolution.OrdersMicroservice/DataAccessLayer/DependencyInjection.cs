@@ -20,7 +20,7 @@ public static class DependencyInjection
         services.AddScoped<IMongoDatabase>(sp =>
         {
             var client = sp.GetRequiredService<IMongoClient>();
-            return client.GetDatabase("OrdersDatabase");
+            return client.GetDatabase(configuration["OrdersDatabaseName"]);
         });
 
         services.AddScoped<IOrdersRepository, OrdersRepository>();

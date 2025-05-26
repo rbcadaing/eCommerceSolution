@@ -12,20 +12,18 @@ services:
    - ecommerce-network
   hostname: mysql-host-productsmicroservice
 
- products-microservice:
-  image: rbcadaing/ecommerce-products-microservice:v1.0
-  build:
-      context: .
-      dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
+ mongodb-container:
+  image: mongo
+  restart: always
   environment:
-   - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
-  depends_on:
-      - mysql-container
+   - MONGO_INITDB_ROOT_USERNAME=root
+   - MONGO_INITDB_ROOT_PASSWORD=mongopw
   ports:
-   - "8080:8080"
+   - "27017:27017"
+  volumes:
+   - ./mongo-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
-
 
  postgres-container:
   image: postgres:16.1
@@ -37,6 +35,20 @@ services:
    - "5432:5432"
   volumes:
    - ./postgres-init:/docker-entrypoint-initdb.d
+  networks:
+   - ecommerce-network
+
+ products-microservice:
+  image: rbcadaing/ecommerce-products-microservice:v1.0
+  build:
+      context: .
+      dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
+  environment:
+   - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
+  depends_on:
+      - mysql-container
+  ports:
+   - "8080:8080"
   networks:
    - ecommerce-network
 
@@ -54,19 +66,6 @@ services:
   networks:
    - ecommerce-network
 
- mongodb-container:
-  image: mongo
-  restart: always
-  environment:
-   - MONGO_INITDB_ROOT_USERNAME=root
-   - MONGO_INITDB_ROOT_PASSWORD=mongopw
-  ports:
-   - "27017:27017"
-  volumes:
-   - ./mongo-init:/docker-entrypoint-initdb.d
-  networks:
-   - ecommerce-network
-
  orders-microservice:
   image: rbcadaing/ecommerce-orders-microservice:v1.0
   build:
@@ -74,6 +73,8 @@ services:
       dockerfile: eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile
   environment:
    - ConnectionStrings__MongoDB=mongodb://root:mongopw@mongodb-container
+   - UsersMicroserviceUrl=http://users-microservice:9090
+   - OrdersDatabaseName=OrdersDatabase
   depends_on:
       - mongodb-container
   ports:

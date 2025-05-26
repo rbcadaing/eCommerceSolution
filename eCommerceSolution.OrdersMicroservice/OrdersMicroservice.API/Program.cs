@@ -2,6 +2,7 @@ using DataAccessLayer;
 using BusinessLogicLayer;
 using FluentValidation.AspNetCore;
 using OrdersMicroservice.API.Middleware;
+using BusinessLogicLayer.HttpClients;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,10 @@ builder.Services.AddCors(options => {
     });
 });
 
+
+builder.Services.AddHttpClient<UsersMicroserviceClient>(client => {
+    client.BaseAddress = new Uri(builder.Configuration["UsersMicroserviceUrl"]!);
+});
 
 var app = builder.Build();
 
