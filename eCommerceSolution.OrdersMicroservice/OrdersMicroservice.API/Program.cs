@@ -3,6 +3,8 @@ using BusinessLogicLayer;
 using FluentValidation.AspNetCore;
 using OrdersMicroservice.API.Middleware;
 using BusinessLogicLayer.HttpClients;
+using Polly;
+using BusinessLogicLayer.Policies;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +23,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Cors
-builder.Services.AddCors(options => {
+builder.Services.AddCors(options =>
+{
     options.AddDefaultPolicy(builder =>
     {
         builder.WithOrigins("http://localhost:4200")
@@ -30,14 +33,31 @@ builder.Services.AddCors(options => {
     });
 });
 
+builder.Services.AddTransient<IUsersMicroservicePolicies, UsersMicroservicePolicies>();
 
-builder.Services.AddHttpClient<UsersMicroserviceClient>(client => {
+#pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+builder.Services.AddHttpClient<UsersMicroserviceClient>(client =>
+{
     client.BaseAddress = new Uri(builder.Configuration["UsersMicroserviceUrl"]!);
-});
+}).AddPolicyHandler(
+   builder.Services.BuildServiceProvider()
+   .GetRequiredService<IUsersMicroservicePolicies>()
+   .GetRetryPolicy()
+  );
+#pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 
-builder.Services.AddHttpClient<ProductsMicroserviceClient>(client => {
+
+#pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+builder.Services.AddHttpClient<ProductsMicroserviceClient>(client =>
+{
     client.BaseAddress = new Uri(builder.Configuration["ProductsMicroserviceUrl"]!);
-});
+}).AddPolicyHandler(
+   builder.Services.BuildServiceProvider()
+   .GetRequiredService<IUsersMicroservicePolicies>()
+   .GetRetryPolicy()
+  );
+#pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+
 
 var app = builder.Build();
 
