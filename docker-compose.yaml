@@ -74,6 +74,7 @@ services:
   environment:
    - ConnectionStrings__MongoDB=mongodb://root:mongopw@mongodb-container
    - UsersMicroserviceUrl=http://users-microservice:9090
+   - ProductsMicroserviceUrl=http://products-microservice:8080
    - OrdersDatabaseName=OrdersDatabase
   depends_on:
       - mongodb-container

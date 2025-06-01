@@ -35,6 +35,10 @@ builder.Services.AddHttpClient<UsersMicroserviceClient>(client => {
     client.BaseAddress = new Uri(builder.Configuration["UsersMicroserviceUrl"]!);
 });
 
+builder.Services.AddHttpClient<ProductsMicroserviceClient>(client => {
+    client.BaseAddress = new Uri(builder.Configuration["ProductsMicroserviceUrl"]!);
+});
+
 var app = builder.Build();
 
 app.UseExceptionHandlingMiddleware();
