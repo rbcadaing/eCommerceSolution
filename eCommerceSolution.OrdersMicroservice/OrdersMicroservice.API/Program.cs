@@ -34,16 +34,30 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddTransient<IUsersMicroservicePolicies, UsersMicroservicePolicies>();
+builder.Services.AddTransient<IProductsMicroservicePolicies, ProductsMicroservicePolicies>();
+builder.Services.AddTransient<IPollyPolicies, PollyPolicies>();
 
 #pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 builder.Services.AddHttpClient<UsersMicroserviceClient>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["UsersMicroserviceUrl"]!);
-}).AddPolicyHandler(
-   builder.Services.BuildServiceProvider()
-   .GetRequiredService<IUsersMicroservicePolicies>()
-   .GetRetryPolicy()
-  );
+})
+//.AddPolicyHandler(
+//   builder.Services.BuildServiceProvider()
+//   .GetRequiredService<IUsersMicroservicePolicies>()
+//   .GetRetryPolicy()
+//  )
+//.AddPolicyHandler(
+//   builder.Services.BuildServiceProvider()
+//   .GetRequiredService<IUsersMicroservicePolicies>()
+//   .GetCircuitBreakerPolicy()
+//  )
+//.AddPolicyHandler(
+//   builder.Services.BuildServiceProvider().GetRequiredService<IUsersMicroservicePolicies>().GetTimeoutPolicy()
+// );
+.AddPolicyHandler(
+   builder.Services.BuildServiceProvider().GetRequiredService<IUsersMicroservicePolicies>().GetCombinedPolicy());
+
 #pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 
 
@@ -53,9 +67,14 @@ builder.Services.AddHttpClient<ProductsMicroserviceClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["ProductsMicroserviceUrl"]!);
 }).AddPolicyHandler(
    builder.Services.BuildServiceProvider()
-   .GetRequiredService<IUsersMicroservicePolicies>()
-   .GetRetryPolicy()
-  );
+   .GetRequiredService<IProductsMicroservicePolicies>()
+   .GetFallbackPolicy()
+  )
+.AddPolicyHandler(
+   builder.Services.BuildServiceProvider().GetRequiredService<IProductsMicroservicePolicies>().GetBulkheadIsolationPolicy()
+   );
+
+
 #pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 
 
