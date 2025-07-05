@@ -38,6 +38,15 @@ services:
   networks:
    - ecommerce-network
 
+ redis-container:
+  image: redis:latest
+  ports:
+   - "6379:6379"
+  volumes:
+   - E:\Lab\ecommerce\redis-cache:/data
+  networks:
+   - ecommerce-network
+
  products-microservice:
   image: rbcadaing/ecommerce-products-microservice:v1.0
   build:
@@ -76,6 +85,7 @@ services:
    - UsersMicroserviceUrl=http://users-microservice:9090
    - ProductsMicroserviceUrl=http://products-microservice:8080
    - OrdersDatabaseName=OrdersDatabase
+   - ConnectionStrings__Redis=redis-container:6379
   depends_on:
       - mongodb-container
   ports:
