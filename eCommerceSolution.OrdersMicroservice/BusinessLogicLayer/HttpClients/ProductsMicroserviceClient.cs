@@ -67,7 +67,7 @@ public class ProductsMicroserviceClient
                 }
             }
 
-            //var resP = await response.Content.ReadAsStringAsync();
+            var resP = await response.Content.ReadAsStringAsync();
             ProductDTO? product = await response.Content.ReadFromJsonAsync<ProductDTO>();
 
             if (product == null)
@@ -93,7 +93,7 @@ public class ProductsMicroserviceClient
             return new ProductDTO(
               ProductID: Guid.NewGuid(),
               ProductName: "Temporarily Unavailable (Bulkhead)",
-              Category: "Temporarily Unavailable (Bulkhead)",
+              Category: 0,
               UnitPrice: 0,
               QuantityInStock: 0);
         }

@@ -28,7 +28,7 @@ public class ProductsMicroservicePolicies : IProductsMicroservicePolicies
 
             ProductDTO product = new ProductDTO(ProductID: Guid.Empty,
             ProductName: "Temporarily Unavailable (fallback)",
-            Category: "Temporarily Unavailable (fallback)",
+            Category: 0,
             UnitPrice: 0,
             QuantityInStock: 0
             );

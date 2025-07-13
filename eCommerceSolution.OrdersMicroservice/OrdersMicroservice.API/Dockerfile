@@ -16,6 +16,7 @@ COPY ["eCommerceSolution.OrdersMicroservice/eCommerceSolution.OrdersMicroservice
 COPY ["eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/OrdersMicroservice.API.csproj", "OrdersMicroservice.API/OrdersMicroservice.API.csproj"]
 COPY ["eCommerceSolution.OrdersMicroservice/BusinessLogicLayer/BusinessLogicLayer.csproj", "BusinessLogicLayer/BusinessLogicLayer.csproj"]
 COPY ["eCommerceSolution.OrdersMicroservice/DataAccessLayer/DataAccessLayer.csproj", "DataAccessLayer/DataAccessLayer.csproj"]
+COPY ["eCommerceSolution.OrdersMicroservice/ApiGateway/ApiGateway.csproj", "ApiGateway/ApiGateway.csproj"]
 RUN dotnet restore "eCommerceSolution.OrdersMicroservice.sln"
 
 COPY ["eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API", "OrdersMicroservice.API"]

@@ -1,7 +1,8 @@
 // src/environments/environment.ts
 export const environment = {
-    production: false,
-    usersAPIURL: 'http://localhost:9090/api/',
-    productsAPIURL: 'http://localhost:8080/api/products/',
-    ordersAPIURL: 'https://localhost:7116/api/orders/',
-  };
+  production: false,
+  usersAPIURL: 'http://localhost:4000/gateway/users/',
+  productsAPIURL: 'http://localhost:4000/gateway/products/',
+  ordersAPIURL: 'http://localhost:4000/gateway/orders/',
+  gatewayURL: 'http://localhost:4000/gateway/',
+};
