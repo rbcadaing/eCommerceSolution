@@ -53,8 +53,8 @@ services:
   apigateway:
     image: rbcadaing/apigateway:latest
     build:
-      context: ../
-      dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
+      context: .
+      dockerfile: eCommerceSolution/eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
     ports:
      - "5000:8080"
     networks:
@@ -67,8 +67,8 @@ services:
   users-microservice:
    image: rbcadaing/users-microservice:latest
    build: 
-    context: ../
-    dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
+    context: .
+    dockerfile: eCommerceSolution/eCommerceSolution.UserService/eCommerce.API/Dockerfile
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
     - POSTGRES_HOST=postgres-container
@@ -90,8 +90,8 @@ services:
   products-microservice:
    image: rbcadaing/products-microservice:latest
    build: 
-    context: ../
-    dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
+    context: .
+    dockerfile: eCommerceSolution/eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
     - MYSQL_HOST=mysql-container
@@ -113,8 +113,8 @@ services:
   orders-microservice:
     image: rbcadaing/orders-microservice:latest
     build: 
-     context: ../
-     dockerfile: eCommerceSolution.OrdersMicroService/OrdersMicroservice.API/Dockerfile
+     context: .
+     dockerfile: eCommerceSolution/eCommerceSolution.OrdersMicroService/OrdersMicroservice.API/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
      - MONGODB_HOST=mongodb-container
