@@ -1,7 +1,7 @@
 # Base image for the build stage
 FROM alpine:latest AS builder
 WORKDIR /app
-COPY ./deployment/mongodb/mongo-init ./
+COPY ./mongodb/mongo-init ./
 RUN apk add --no-cache openssl
 
 # Base image for the final MongoDB image
