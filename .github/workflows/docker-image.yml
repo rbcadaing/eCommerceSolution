@@ -23,7 +23,6 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
         
     - name: Build and push services
-      working-directory: ./deployment
       run: |
         ls
         docker compose -f docker-compose.build.yaml build
