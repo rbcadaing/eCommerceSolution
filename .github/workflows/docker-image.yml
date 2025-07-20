@@ -24,9 +24,9 @@ jobs:
         
     - name: Run from root
       run: echo "Running in root"
-      working-directory: ./
+      working-directory: ./deployment
       
     - name: Build and push services
       run: |
-        docker compose -f deployment/docker-compose.build.yaml build
-        docker compose -f deployment/docker-compose.build.yaml push
+        docker compose -f docker-compose.build.yaml build
+        docker compose -f docker-compose.build.yaml push
