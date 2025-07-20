@@ -53,7 +53,7 @@ services:
   apigateway:
     image: rbcadaing/apigateway:latest
     build:
-      context: .
+      context: ../
       dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
     ports:
      - "5000:8080"
@@ -67,7 +67,7 @@ services:
   users-microservice:
    image: rbcadaing/users-microservice:latest
    build: 
-    context: .
+    context: ../
     dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
@@ -90,7 +90,7 @@ services:
   products-microservice:
    image: rbcadaing/products-microservice:latest
    build: 
-    context: .
+    context: ../
     dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
@@ -113,7 +113,7 @@ services:
   orders-microservice:
     image: rbcadaing/orders-microservice:latest
     build: 
-     context: .
+     context: ../
      dockerfile: eCommerceSolution.OrdersMicroService/OrdersMicroservice.API/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
