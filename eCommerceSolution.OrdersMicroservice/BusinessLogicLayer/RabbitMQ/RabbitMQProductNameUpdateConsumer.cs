@@ -17,6 +17,12 @@ public class RabbitMQProductNameUpdateConsumer : IDisposable, IRabbitMQProductNa
     public RabbitMQProductNameUpdateConsumer(IConfiguration configuration, ILogger<RabbitMQProductNameUpdateConsumer> logger)
     {
         _configuration = configuration;
+
+        Console.WriteLine($"RabbitMQ_HostName: {_configuration["RabbitMQ_HostName"]!}");
+        Console.WriteLine($"RabbitMQ_UserName: {_configuration["RabbitMQ_UserName"]!}");
+        Console.WriteLine($"RabbitMQ_Password: {_configuration["RabbitMQ_Password"]!}");
+        Console.WriteLine($"RabbitMQ_Port: {_configuration["RabbitMQ_Port"]!}");
+
         _logger = logger;
         string hostName = _configuration["RabbitMQ_HostName"]!;
         string userName = _configuration["RabbitMQ_UserName"]!;

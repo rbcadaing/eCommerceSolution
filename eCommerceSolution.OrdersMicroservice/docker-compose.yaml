@@ -113,7 +113,7 @@ services:
    - ecommerce-network
 
  apigateway-microservice:
-  image: apigateway
+  image: rbcadaing/apigateway
   build:
    context: ../
    dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
