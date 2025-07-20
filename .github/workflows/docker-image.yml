@@ -21,8 +21,9 @@ jobs:
       with:
         username: ${{ vars.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
-
+        
     - name: Build and push services
       run: |
+        ls
         docker compose -f deployment/docker-compose.build.yaml build
         docker compose -f deployment/docker-compose.build.yaml push
