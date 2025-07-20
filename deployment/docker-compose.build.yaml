@@ -3,7 +3,7 @@ services:
    image: rbcadaing/ecommerce-mongodb:latest
    build: 
      context: .
-     dockerfile: deployment/mongodb/Dockerfile
+     dockerfile: mongodb/Dockerfile
    ports:
     - "27017:27017"
    networks:
@@ -13,7 +13,7 @@ services:
    image: rbcadaing/ecommerce-mysql:latest
    build: 
      context: .
-     dockerfile: deployment/mysql/Dockerfile
+     dockerfile: mysql/Dockerfile
    environment:
     - MYSQL_ROOT_PASSWORD=admin
    ports:
@@ -25,7 +25,7 @@ services:
    image: rbcadaing/ecommerce-postgres:latest
    build: 
      context: .
-     dockerfile: deployment/postgres/Dockerfile
+     dockerfile: postgres/Dockerfile
    environment:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=admin
