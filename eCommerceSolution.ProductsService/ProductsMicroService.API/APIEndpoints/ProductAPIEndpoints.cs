@@ -11,6 +11,7 @@ public static class ProductAPIEndpoints
 {
     public static IEndpointRouteBuilder MapProductAPIEndpoints(this IEndpointRouteBuilder app)
     {
+        // Get Products
         //GET /api/products
         app.MapGet("/api/products", async ([FromServices] IProductsService productsService) =>
         {
@@ -18,7 +19,7 @@ public static class ProductAPIEndpoints
             return Results.Ok(products);
         });
 
-
+        //Get Specific Product
         //GET /api/products/search/product-id/00000000-0000-0000-0000-000000000000
         app.MapGet("/api/products/search/product-id/{ProductID:guid}", async ([FromServices] IProductsService productsService, Guid ProductID) =>
         {
@@ -42,7 +43,7 @@ public static class ProductAPIEndpoints
             return Results.Ok(products);
         });
 
-
+        //Create product
         //POST /api/products
         app.MapPost("/api/products", async ([FromServices] IProductsService productsService, [FromServices] IValidator<ProductAddRequest> productAddRequestValidator, ProductAddRequest productAddRequest) =>
         {
@@ -67,7 +68,7 @@ public static class ProductAPIEndpoints
                 return Results.Problem("Error in adding product");
         });
 
-
+        //Update Products
         //PUT /api/products
         app.MapPut("/api/products", async ([FromServices] IProductsService productsService, [FromServices] IValidator<ProductUpdateRequest> productUpdateRequestValidator, ProductUpdateRequest productUpdateRequest) =>
         {

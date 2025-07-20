@@ -7,7 +7,7 @@ services:
   ports:
    - "3306:3306"
   volumes:
-   - ./mysql-init:/docker-entrypoint-initdb.d
+   - ../mysql-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
   hostname: mysql-host-productsmicroservice
@@ -21,7 +21,7 @@ services:
   ports:
    - "27017:27017"
   volumes:
-   - ./mongo-init:/docker-entrypoint-initdb.d
+   - ../mongo-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
 
@@ -34,7 +34,7 @@ services:
   ports:
    - "5432:5432"
   volumes:
-   - ./postgres-init:/docker-entrypoint-initdb.d
+   - ../postgres-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
 
@@ -43,10 +43,10 @@ services:
   ports:
    - "6379:6379"
   volumes:
-   - E:\Lab\ecommerce\redis-cache:/data
+   - ../redis-cache:/data
 
  rabbitmq-container:
-  image: rabbitmq:3.13-management
+  image: rabbitmq:4.1.2-management
   ports:
    - "5672:5672"
    - "15672:15672"
@@ -59,10 +59,15 @@ services:
  products-microservice:
   image: rbcadaing/ecommerce-products-microservice:v1.0
   build:
-      context: .
+      context: ../
       dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
   environment:
    - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
+   - RabbitMQ__HostName=rabbitmq-container
+   - RabbitMQ__UserName=user
+   - RabbitMQ__Password=password
+   - RabbitMQ_Port=5672
+   - RabbitMQ_Product_Exchange=product.exchange
   depends_on:
       - mysql-container
   ports:
@@ -73,7 +78,7 @@ services:
  users-microservice:
   image: rbcadaing/ecommerce-users-microservice:v1.0
   build:
-      context: .
+      context: ../
       dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
   environment:
    - ConnectionStrings__PostgresConnection=Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=postgrespw;
@@ -87,7 +92,7 @@ services:
  orders-microservice:
   image: rbcadaing/ecommerce-orders-microservice:v1.0
   build:
-      context: .
+      context: ../
       dockerfile: eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile
   environment:
    - ConnectionStrings__MongoDB=mongodb://root:mongopw@mongodb-container
@@ -98,6 +103,8 @@ services:
    - RabbitMQ__HostName=rabbitmq-container
    - RabbitMQ__UserName=user
    - RabbitMQ__Password=password
+   - RabbitMQ_Port=5672
+   - RabbitMQ_Product_Exchange=product.exchange
   depends_on:
       - mongodb-container
   ports:
@@ -108,7 +115,7 @@ services:
  apigateway-microservice:
   image: apigateway
   build:
-   context: .
+   context: ../
    dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
   ports:
    - "4000:8080"
