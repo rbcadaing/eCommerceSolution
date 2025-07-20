@@ -1,12 +1,13 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.RabbitMQ;
 using BusinessLogicLayer.ServiceContracts;
 using DataAccessLayer.Entities;
 using eCommerce.BusinessLogicLayer.RabbitMQ;
 using eCommerce.DataAccessLayer.RepositoryContracts;
 using FluentValidation;
 using FluentValidation.Results;
+using System.Linq.Expressions;
 
 namespace BusinessLogicLayer.Services;
 
@@ -73,6 +74,18 @@ public class ProductsService : IProductsService
 
         //Attempt to delete product
         bool isDeleted = await _productsRepository.DeleteProduct(productID);
+
+        //TO DO: Add code for posting a message to the message queue that announces the consumers about the deleted product details
+
+        //Publish message of product.delete
+        if (isDeleted)
+        {
+            ProductDeletionMessage message = new ProductDeletionMessage(existingProduct.ProductID, existingProduct.ProductName);
+            string routingKey = "product.delete";
+
+            _rabbitMQPublisher.Publish(message, routingKey);
+        }
+
         return isDeleted;
     }
 
