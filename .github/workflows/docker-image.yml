@@ -22,11 +22,8 @@ jobs:
         username: ${{ vars.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
         
-    - name: Run from root
-      run: echo "Running in root"
-      working-directory: ./deployment
-      
     - name: Build and push services
+      working-directory: ./deployment
       run: |
         docker compose -f docker-compose.build.yaml build
         docker compose -f docker-compose.build.yaml push
