@@ -25,5 +25,5 @@ jobs:
     - name: Build and push services
       run: |
         ls
-        docker compose -f docker-compose.build.yaml build
-        docker compose -f docker-compose.build.yaml push
+        docker compose -f deployment/docker-compose.build.yaml build
+        docker compose -f deployment/docker-compose.build.yaml push
