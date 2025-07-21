@@ -70,6 +70,10 @@ jobs:
           cluster-name: 'ecommerce--env-aks-cluster'
           admin: 'false'
           use-kubelogin: 'true'
+          
+      - name: create aks namespace
+        run: |
+          kubectl create namespace 'ecommerce-namespace'
 
       # Deploys application based on given manifest file
       - name: Deploys application
