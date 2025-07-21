@@ -8,6 +8,8 @@ on:
       - main  # Replace with your target branch
     paths:
       - 'eCommerceSolution.OrdersMicroservice/**'
+    paths-ignore:
+      - 'eCommerceSolution.OrdersMicroservice/ApiGateway/**'
 
 jobs:
   build:
