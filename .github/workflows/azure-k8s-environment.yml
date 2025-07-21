@@ -27,6 +27,23 @@ jobs:
           az provider register --namespace Microsoft.Authorization --wait
           az provider register --namespace Microsoft.Storage --wait;
           az aks create --resource-group ecommerce-env-rg --name ecommerce--env-aks-cluster --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
+      
+      - name: Set up kubelogin for non-interactive login
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.0.25'
+          
+      - name: Get K8s context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: 'ecommerce-env-rg'
+          cluster-name: 'ecommerce--env-aks-cluster'
+          admin: 'false'
+          use-kubelogin: 'true'
+          
+      - name: create aks namespace
+        run: |
+          kubectl create namespace 'ecommerce-namespace'
 
 
 
