@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: harshaecommerceregistry.azurecr.io/ecommerce-mongodb:latest
+        image: rbcadaing/ecommerce-mongodb:latest
         ports:
         - containerPort: 27017
