@@ -1,5 +1,5 @@
 
-name: Build Postgres Image
+name: Build-03-Postgres Image
 
 on:
   workflow_dispatch:
