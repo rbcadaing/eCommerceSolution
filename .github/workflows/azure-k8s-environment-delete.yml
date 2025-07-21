@@ -1,0 +1,24 @@
+name: Delete Ecommerce AKS Cluster And RG
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-aks-env:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the repository this file is in
+      - uses: actions/checkout@v4
+
+      # Logs in with your Azure credentials
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+      - name: Deploy AKS Environment
+        run: |
+          az group delete --name ecommerce-env-rg --yes --no-wait
+
+
+
