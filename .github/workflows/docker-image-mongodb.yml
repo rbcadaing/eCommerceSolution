@@ -1,5 +1,5 @@
 
-name: Build MongoDB Image
+name: Build-01-MongoDB Image
 
 on:
   workflow_dispatch:
