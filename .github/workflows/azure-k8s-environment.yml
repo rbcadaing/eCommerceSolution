@@ -21,7 +21,8 @@ jobs:
         run: |
           az deployment group create \
             --resource-group 'ecommerce-ms-rg' \
-            --template-file /deployment/infrastructure/aks.bicep
+            --template-file /deployment/infrastructure/aks.bicep \
+            --parameters sshRSAPublicKey=${{ secrets.AZURE_RG_SSHKEY }}
 
 
 
