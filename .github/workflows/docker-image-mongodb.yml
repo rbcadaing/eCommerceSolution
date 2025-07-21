@@ -16,6 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
+      working-directory: ./deployment
       run: |
         ls
-        docker build . --file deployment/mongodb/Dockerfile --tag my-image-name:$(date +%s)
+        docker build . --file mongodb/Dockerfile --tag my-image-name:$(date +%s)
