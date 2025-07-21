@@ -1,4 +1,4 @@
-name: 01-Deploy Ecommerce AKS Cluster
+name: Infrastructure-01-Deploy Ecommerce AKS Cluster
 
 on:
   workflow_dispatch:
