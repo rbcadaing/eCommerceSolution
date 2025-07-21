@@ -1,4 +1,4 @@
-name: Delete Ecommerce AKS Cluster And RG
+name: 02-Delete Ecommerce AKS Cluster And RG
 
 on:
   workflow_dispatch:
