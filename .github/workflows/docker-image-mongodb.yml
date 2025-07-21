@@ -26,5 +26,6 @@ jobs:
       run: |
         ls
         docker build . --file mongodb/Dockerfile --tag rbcadaing/ecommerce-mongodb:latest
-        #docker tag ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:latest
         docker images
+        docker push rbcadaing/ecommerce-mongodb:latest
+        
