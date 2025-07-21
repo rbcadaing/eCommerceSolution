@@ -7,7 +7,7 @@ on:
     branches:
       - main  # Replace with your target branch
     paths:
-      - 'eCommerceSolution.OrdersMicroservice/**'
+      - 'eCommerceSolution.ProductsService/**'
 
 jobs:
   build:
