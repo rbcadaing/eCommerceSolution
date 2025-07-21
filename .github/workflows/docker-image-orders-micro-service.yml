@@ -1,5 +1,5 @@
 
-name: Build eCommerce Orders Service Image
+name: Build-04-eCommerce Orders Service Image
 
 on:
   workflow_dispatch:
