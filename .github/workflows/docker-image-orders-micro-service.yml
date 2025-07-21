@@ -3,6 +3,11 @@ name: Build eCommerce Orders Service Image
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main  # Replace with your target branch
+    paths:
+      - 'eCommerceSolution.OrdersMicroservice/**'
 
 jobs:
   build:
@@ -22,7 +27,7 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
         
     - name: Build and push mongodb image
-      working-directory: ./deployment
+      working-directory: ./
       run: |
         ls
         docker build . --file eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile --tag rbcadaing/orders-microservice:latest
