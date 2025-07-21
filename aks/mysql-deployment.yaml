@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: harshaecommerceregistry.azurecr.io/ecommerce-mysql:latest
+        image: rbcadaing/ecommerce-mysql:latest
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: admin
