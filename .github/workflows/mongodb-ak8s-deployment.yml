@@ -41,5 +41,5 @@ jobs:
         with:
           action: deploy
           namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
-          manifests: ./aks/postgres-deployment.yaml
+          manifests: ./aks/mongodb-deployment.yaml
 
