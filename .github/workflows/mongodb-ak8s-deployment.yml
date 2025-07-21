@@ -30,8 +30,6 @@
 name: Ecommerce MongoDB AKS deployment
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 env:
