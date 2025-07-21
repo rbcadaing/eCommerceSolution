@@ -40,5 +40,6 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
           manifests: ./aks/mongodb-deployment.yaml
 
