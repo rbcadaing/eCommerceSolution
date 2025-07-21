@@ -1,4 +1,5 @@
-name: Build MongoDb Image
+
+name: Build MongoDB Image
 
 on:
   workflow_dispatch:
@@ -20,7 +21,8 @@ jobs:
         username: ${{ vars.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
         
-    - name: Build and push services
+    - name: Build and push mongodb image
+      working-directory: ./deployment
       run: |
         ls
         docker build . --file mongodb/Dockerfile
