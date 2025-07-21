@@ -1,4 +1,4 @@
-name: Build and deploy an app to AKS
+name: Deploy Ecommerce AKS Cluster
 
 on:
   workflow_dispatch:
@@ -15,14 +15,19 @@ jobs:
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # Builds and pushes an image up to your Azure Container Registry
       - name: Deploy AKS Environment
         run: |
-          az deployment group create \
-            --resource-group 'ecommerce-ms-rg' \
-            --template-file ./deployment/infrastructure/aks.bicep \
-            --parameters sshRSAPublicKey='${{ secrets.AZURE_RG_SSHKEY }} myAdmin@linuxvm' linuxAdminUsername='myAdmin'
+          az group create --name ecommerce-env-rg --location "South East Asia"
+          az provider register --namespace Microsoft.Insights --wait
+          az provider register --namespace Microsoft.OperationalInsights --wait
+          az provider register --namespace Microsoft.ContainerService --wait
+          az provider register --namespace Microsoft.Network --wait
+          az provider register --namespace Microsoft.Compute --wait
+          az provider register --namespace Microsoft.OperationsManagement --wait
+          az provider register --namespace Microsoft.Authorization --wait
+          az provider register --namespace Microsoft.Storage --wait;
+          az aks create --resource-group ecommerce-env-rg --name ecommerce--env-aks-cluster --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
+
 
 
 
