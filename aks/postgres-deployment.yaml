@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-deployment
-  namespace: ecommerce-namespace
+  namespace: default
   labels:
     app: postgres
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: harshaecommerceregistry.azurecr.io/ecommerce-postgres:latest
+        image: rbcadaing/ecommerce-postgres:latest
         env:
         - name: POSTGRES_USER
           value: postgres
