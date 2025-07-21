@@ -1,0 +1,31 @@
+
+name: Build eCommerce Orders Service Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+        
+    - name: Build and push mongodb image
+      working-directory: ./deployment
+      run: |
+        ls
+        docker build . --file eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile --tag rbcadaing/orders-microservice:latest
+        docker images
+        docker push rbcadaing/orders-microservice:latest
+        
