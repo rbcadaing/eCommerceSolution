@@ -23,5 +23,6 @@ jobs:
     - name: Build and push services
       run: |
         ls
-        docker build . --file mongodb/Dockerfile --tag rbcadaing/mongodb:latest rbcadaing/mongodb:latest
-        docker image ls
+        docker build . --file mongodb/Dockerfile
+        docker tag ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:latest
+        docker images
