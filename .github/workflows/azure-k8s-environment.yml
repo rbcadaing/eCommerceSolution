@@ -1,0 +1,29 @@
+name: Build and deploy an app to AKS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-aks-env:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the repository this file is in
+      - uses: actions/checkout@v4
+
+      # Logs in with your Azure credentials
+      - name: Azure login
+        uses: azure/login@v1.4.6
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Builds and pushes an image up to your Azure Container Registry
+      - name: Deploy AKS Environment
+        run: |
+          az deployment group create \
+            --resource-group 'ecommerce-ms-rg' \
+            --template-file /deployment/infrastructure/aks.bicep
+
+
+
