@@ -1,4 +1,4 @@
-name: Deployment-02-AKS Ecommerce MySql
+name: Deployment-03-AKS Ecommerce MySql
 
 on:
   workflow_dispatch:
