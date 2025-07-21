@@ -17,7 +17,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy AKS Environment
         run: |
-          az group create --name ${{ vars.ECOMMERCE_AKS_RG }} --location ${{ vars.ECOMMERCE_AKS_RG_REGION }}
+          az group create --name '${{ vars.ECOMMERCE_AKS_RG }}' --location '${{ vars.ECOMMERCE_AKS_RG_REGION }}'
           az provider register --namespace Microsoft.Insights --wait
           az provider register --namespace Microsoft.OperationalInsights --wait
           az provider register --namespace Microsoft.ContainerService --wait
@@ -26,7 +26,7 @@ jobs:
           az provider register --namespace Microsoft.OperationsManagement --wait
           az provider register --namespace Microsoft.Authorization --wait
           az provider register --namespace Microsoft.Storage --wait;
-          az aks create --resource-group ${{ vars.ECOMMERCE_AKS_RG }} --name ${{ vars.ECOMMERCE_AKS_CLUSTER_NAME}} --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
+          az aks create --resource-group '${{ vars.ECOMMERCE_AKS_RG }}' --name '${{ vars.ECOMMERCE_AKS_CLUSTER_NAME}}' --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
       
       - name: Set up kubelogin for non-interactive login
         uses: azure/use-kubelogin@v1
@@ -36,14 +36,14 @@ jobs:
       - name: Get K8s context
         uses: azure/aks-set-context@v3
         with:
-          resource-group: ${{ vars.ECOMMERCE_AKS_RG }}
-          cluster-name: ${{ vars.ECOMMERCE_AKS_CLUSTER_NAME}}
+          resource-group: '${{ vars.ECOMMERCE_AKS_RG }}'
+          cluster-name: '${{ vars.ECOMMERCE_AKS_CLUSTER_NAME}}'
           admin: 'false'
           use-kubelogin: 'true'
           
       - name: create aks namespace
         run: |
-          kubectl create namespace ${{ vars.ECOMMERCE_AKS_NAMESPACE}}
+          kubectl create namespace '${{ vars.ECOMMERCE_AKS_NAMESPACE}}'
 
 
 
