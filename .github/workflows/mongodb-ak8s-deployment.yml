@@ -1,4 +1,4 @@
-name: 01-Deployment AKS Ecommerce MongoDB
+name: Deployment-01-AKS Ecommerce MongoDB
 
 on:
   workflow_dispatch:
