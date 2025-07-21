@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb-deployment
-  namespace: ecommerce-namespace
+  namespace: default
   labels:
     app: mongodb
 spec:
