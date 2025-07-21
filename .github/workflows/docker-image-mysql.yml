@@ -1,5 +1,5 @@
 
-name: Build MySQL Image
+name: Build-02-MySQL Image
 
 on:
   workflow_dispatch:
