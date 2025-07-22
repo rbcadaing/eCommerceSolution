@@ -5,7 +5,7 @@ FROM alpine:latest AS builder
 WORKDIR /app
 
 # Copy initialization scripts from the host to the container
-COPY ./mysql/mysql-init /app
+COPY ./mysql-init /app
 
 # Install required packages (adjust based on your script needs)
 RUN apk add --no-cache openssl
