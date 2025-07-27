@@ -49,7 +49,7 @@ public class RabbitMQProductDeletionConsumer : IDisposable, IRabbitMQProductDele
         string queueName = "orders.product.delete.queue";
 
         //Create exchange
-        string exchangeName = _configuration["RabbitMQ_Product_Exchange"]!;
+        string exchangeName = _configuration["RabbitMQ:ProductExchange"]!;
         _channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Direct, durable: true);
 
         //Create message queue

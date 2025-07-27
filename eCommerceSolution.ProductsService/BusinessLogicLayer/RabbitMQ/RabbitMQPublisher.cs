@@ -42,7 +42,7 @@ public class RabbitMQPublisher : IRabbitMQPublisher, IDisposable
         byte[] messageBodyInBytes = Encoding.UTF8.GetBytes(messageJson);
 
         // Create exchange
-        string exchangeName = _configuration["RabbitMQ_Product_Exchange"]!;
+        string exchangeName = _configuration["RabbitMQ:ProductExchange"]!;
         _channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Direct, durable: true).Wait();
 
         // Publish message

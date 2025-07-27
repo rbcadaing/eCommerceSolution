@@ -56,7 +56,7 @@ services:
     networks:
      - ecommerce-network
 
-  apigateway:
+  apigateway-microservice:
     image: rbcadaing/apigateway:latest
     build:
       context: .
@@ -77,12 +77,12 @@ services:
     dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
-    - ConnectionStrings__PostgresConnection=Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=postgrespw;
-    - RabbitMQ_HostName=rabbitmq
-    - RabbitMQ_Port=5672
-    - RabbitMQ_UserName=guest
-    - RabbitMQ_Password=guest
-    - RabbitMQ_Users_Exchange=users.exchange
+    - ConnectionStrings__PostgresConnection=Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=admin;
+    - RabbitMQ__HostName=rabbitmq
+    - RabbitMQ__Port=5672
+    - RabbitMQ__UserName=guest
+    - RabbitMQ__Password=guest
+    - RabbitMQ__UsersExchange=users.exchange
    ports:
     - "9090:9090"
    networks:
@@ -101,7 +101,7 @@ services:
     - RabbitMQ__UserName=user
     - RabbitMQ__Password=password
     - RabbitMQ__Port=5672
-    - RabbitMQ__Product_Exchange=product.exchange
+    - RabbitMQ__ProductExchange=product.exchange
    ports:
     - "8080:8080"
    networks:
@@ -124,7 +124,7 @@ services:
      - RabbitMQ__UserName=user
      - RabbitMQ__Password=password
      - RabbitMQ__Port=5672
-     - RabbitMQ__Product_Exchange=product.exchange
+     - RabbitMQ__ProductExchange=product.exchange
     ports:
      - "9091:8080"
     networks:

@@ -70,6 +70,7 @@ public class OrdersRepository : IOrdersRepository
         FilterDefinition<Order> filter = Builders<Order>.Filter.Eq(temp => temp.OrderID, order.OrderID);
 
         Order? existingOrder = (await _orders.FindAsync(filter)).FirstOrDefault();
+        order._id = existingOrder._id;
 
         if (existingOrder == null)
         {

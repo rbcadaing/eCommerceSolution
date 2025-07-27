@@ -13,7 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["eCommerceSolution.OrdersMicroservice/eCommerceSolution.OrdersMicroservice.sln", "eCommerceSolution.OrdersMicroservice.sln"]
-COPY ["eCommerceSolution.OrdersMicroservice/docker-compose.dcproj", "docker-compose.dcproj"]
 COPY ["eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/OrdersMicroservice.API.csproj", "OrdersMicroservice.API/OrdersMicroservice.API.csproj"]
 COPY ["eCommerceSolution.OrdersMicroservice/BusinessLogicLayer/BusinessLogicLayer.csproj", "BusinessLogicLayer/BusinessLogicLayer.csproj"]
 COPY ["eCommerceSolution.OrdersMicroservice/DataAccessLayer/DataAccessLayer.csproj", "DataAccessLayer/DataAccessLayer.csproj"]

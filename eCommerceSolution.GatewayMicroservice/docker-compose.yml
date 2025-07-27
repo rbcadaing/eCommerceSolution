@@ -1,6 +1,0 @@
-services:
-  apigateway:
-    image: ${DOCKER_REGISTRY-}apigateway
-    build:
-      context: .
-      dockerfile: ApiGateway/Dockerfile

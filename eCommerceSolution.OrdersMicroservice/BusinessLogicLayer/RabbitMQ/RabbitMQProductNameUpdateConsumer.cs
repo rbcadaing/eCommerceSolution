@@ -48,7 +48,7 @@ public class RabbitMQProductNameUpdateConsumer : IDisposable, IRabbitMQProductNa
         string queueName = "orders.product.update.name.queue";
 
         //Create exchange
-        string exchangeName = _configuration["RabbitMQ_Product_Exchange"]!;
+        string exchangeName = _configuration["RabbitMQ:ProductExchange"]!;
         _channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Direct, durable: true).GetAwaiter();
 
         //Create message queue
