@@ -11,10 +11,10 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["eCommerceSolution.OrdersMicroservice/ApiGateway/ApiGateway.csproj", "ApiGateway/ApiGateway.csproj"]
+COPY ["eCommerceSolution.GatewayMicroservice/ApiGateway/ApiGateway.csproj", "ApiGateway/ApiGateway.csproj"]
 RUN dotnet restore "./ApiGateway/ApiGateway.csproj"
 
-COPY ["eCommerceSolution.OrdersMicroservice/ApiGateway", "ApiGateway"]
+COPY ["eCommerceSolution.GatewayMicroservice/ApiGateway", "ApiGateway"]
 
 WORKDIR "/src/ApiGateway"
 RUN dotnet build "./ApiGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build

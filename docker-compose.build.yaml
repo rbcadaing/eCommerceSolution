@@ -4,10 +4,13 @@ services:
    build: 
      context: ./deployment/mongodb
      dockerfile: /Dockerfile
+   environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=mongopw
    ports:
     - "27017:27017"
    networks:
-    - orders-mongodb-network
+    - ecommerce-network
 
   mysql-container:
    image: rbcadaing/ecommerce-mysql:latest
@@ -19,7 +22,7 @@ services:
    ports:
     - "3306:3306"
    networks:
-    - products-mysql-network
+    - ecommerce-network
 
   postgres-container:
    image: rbcadaing/ecommerce-postgres:latest
@@ -33,7 +36,7 @@ services:
    ports:
     - "5432:5432"
    networks:
-    - users-postgres-network
+    - ecommerce-network
 
   redis:
    image: redis:latest
@@ -57,7 +60,7 @@ services:
     image: rbcadaing/apigateway:latest
     build:
       context: .
-      dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
+      dockerfile: eCommerceSolution.GatewayMicroservice/ApiGateway/Dockerfile
     ports:
      - "5000:8080"
     networks:
@@ -80,8 +83,9 @@ services:
     - RabbitMQ_UserName=guest
     - RabbitMQ_Password=guest
     - RabbitMQ_Users_Exchange=users.exchange
+   ports:
+    - "9090:9090"
    networks:
-    - users-postgres-network
     - ecommerce-network
    depends_on: 
     - postgres-container
@@ -92,14 +96,15 @@ services:
     context: .
     dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
    environment:
-   - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
-   - RabbitMQ__HostName=rabbitmq-container
-   - RabbitMQ__UserName=user
-   - RabbitMQ__Password=password
-   - RabbitMQ_Port=5672
-   - RabbitMQ_Product_Exchange=product.exchange
+    - ConnectionStrings__DefaultConnection=Server=mysql-container;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;
+    - RabbitMQ__HostName=rabbitmq
+    - RabbitMQ__UserName=user
+    - RabbitMQ__Password=password
+    - RabbitMQ__Port=5672
+    - RabbitMQ__Product_Exchange=product.exchange
+   ports:
+    - "8080:8080"
    networks:
-    - products-mysql-network
     - ecommerce-network
    depends_on: 
     - mysql-container
@@ -114,14 +119,15 @@ services:
      - UsersMicroserviceUrl=http://users-microservice:9090
      - ProductsMicroserviceUrl=http://products-microservice:8080
      - OrdersDatabaseName=OrdersDatabase
-     - ConnectionStrings__Redis=redis-container:6379
-     - RabbitMQ__HostName=rabbitmq-container
+     - ConnectionStrings__Redis=redis:6379
+     - RabbitMQ__HostName=rabbitmq
      - RabbitMQ__UserName=user
      - RabbitMQ__Password=password
-     - RabbitMQ_Port=5672
-     - RabbitMQ_Product_Exchange=product.exchange
+     - RabbitMQ__Port=5672
+     - RabbitMQ__Product_Exchange=product.exchange
+    ports:
+     - "9091:8080"
     networks:
-     - orders-mongodb-network
      - ecommerce-network
     depends_on: 
      - mongodb-container
@@ -132,9 +138,4 @@ services:
 networks:
  ecommerce-network:
   driver: bridge
- users-postgres-network:
-  driver: bridge
- products-mysql-network:
-  driver: bridge
- orders-mongodb-network:
-  driver: bridge
+

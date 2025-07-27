@@ -1,40 +1,39 @@
 
 services:
  mysql-container:
-  image: mysql:8.3.0
+  image: rbcadaing/ecommerce-mysql:latest
+  build: 
+    context: ./deployment/mysql
+    dockerfile: /Dockerfile
   environment:
    - MYSQL_ROOT_PASSWORD=mysqlpw
   ports:
    - "3306:3306"
-  volumes:
-   - ../mysql-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
-  hostname: mysql-host-productsmicroservice
+  #hostname: mysql-host-productsmicroservice
 
  mongodb-container:
-  image: mongo
-  restart: always
-  environment:
-   - MONGO_INITDB_ROOT_USERNAME=root
-   - MONGO_INITDB_ROOT_PASSWORD=mongopw
+  image: rbcadaing/ecommerce-mongodb:latest
+  build: 
+    context: ./deployment/mongodb
+    dockerfile: /Dockerfile
   ports:
    - "27017:27017"
-  volumes:
-   - ../mongo-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
 
  postgres-container:
-  image: postgres:16.1
+  image: rbcadaing/ecommerce-postgres:latest
+  build: 
+    context: ./deployment/postgres
+    dockerfile: /Dockerfile
   environment:
    - POSTGRES_USER=postgres
-   - POSTGRES_PASSWORD=postgrespw
+   - POSTGRES_PASSWORD=admin
    - POSTGRES_DB=eCommerceUsers
   ports:
    - "5432:5432"
-  volumes:
-   - ../postgres-init:/docker-entrypoint-initdb.d
   networks:
    - ecommerce-network
 
@@ -57,7 +56,7 @@ services:
    - ecommerce-network
 
  products-microservice:
-  image: rbcadaing/ecommerce-products-microservice:v1.0
+  image: rbcadaing/ecommerce-products-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
@@ -66,8 +65,8 @@ services:
    - RabbitMQ__HostName=rabbitmq-container
    - RabbitMQ__UserName=user
    - RabbitMQ__Password=password
-   - RabbitMQ_Port=5672
-   - RabbitMQ_Product_Exchange=product.exchange
+   - RabbitMQ__Port=5672
+   - RabbitMQ__Product_Exchange=product.exchange
   depends_on:
       - mysql-container
   ports:
@@ -76,7 +75,7 @@ services:
    - ecommerce-network
 
  users-microservice:
-  image: rbcadaing/ecommerce-users-microservice:v1.0
+  image: rbcadaing/ecommerce-users-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
@@ -90,7 +89,7 @@ services:
    - ecommerce-network
 
  orders-microservice:
-  image: rbcadaing/ecommerce-orders-microservice:v1.0
+  image: rbcadaing/ecommerce-orders-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile
@@ -103,8 +102,8 @@ services:
    - RabbitMQ__HostName=rabbitmq-container
    - RabbitMQ__UserName=user
    - RabbitMQ__Password=password
-   - RabbitMQ_Port=5672
-   - RabbitMQ_Product_Exchange=product.exchange
+   - RabbitMQ__Port=5672
+   - RabbitMQ__Product_Exchange=product.exchange
   depends_on:
       - mongodb-container
   ports:
@@ -116,7 +115,7 @@ services:
   image: apigateway
   build:
    context: ../
-   dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
+   dockerfile: eCommerceSolution.GatewayMicroservice/ApiGateway/Dockerfile
   ports:
    - "4000:8080"
   networks:

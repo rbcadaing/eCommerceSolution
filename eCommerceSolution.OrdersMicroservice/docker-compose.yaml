@@ -57,7 +57,7 @@ services:
    - ecommerce-network
 
  products-microservice:
-  image: rbcadaing/ecommerce-products-microservice:v1.0
+  image: rbcadaing/ecommerce-products-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.ProductsService/ProductsMicroService.API/Dockerfile
@@ -76,7 +76,7 @@ services:
    - ecommerce-network
 
  users-microservice:
-  image: rbcadaing/ecommerce-users-microservice:v1.0
+  image: rbcadaing/ecommerce-users-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.UserService/eCommerce.API/Dockerfile
@@ -90,7 +90,7 @@ services:
    - ecommerce-network
 
  orders-microservice:
-  image: rbcadaing/ecommerce-orders-microservice:v1.0
+  image: rbcadaing/ecommerce-orders-microservice:latest
   build:
       context: ../
       dockerfile: eCommerceSolution.OrdersMicroservice/OrdersMicroservice.API/Dockerfile
@@ -116,7 +116,7 @@ services:
   image: rbcadaing/apigateway
   build:
    context: ../
-   dockerfile: eCommerceSolution.OrdersMicroservice/ApiGateway/Dockerfile
+   dockerfile: eCommerceSolution.GatewayMicroservice/ApiGateway/Dockerfile
   ports:
    - "4000:8080"
   networks:

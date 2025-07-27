@@ -18,15 +18,15 @@ public class RabbitMQProductDeletionConsumer : IDisposable, IRabbitMQProductDele
     {
         _configuration = configuration;
 
-        Console.WriteLine($"RabbitMQ_HostName: {_configuration["RabbitMQ_HostName"]!}");
-        Console.WriteLine($"RabbitMQ_UserName: {_configuration["RabbitMQ_UserName"]!}");
-        Console.WriteLine($"RabbitMQ_Password: {_configuration["RabbitMQ_Password"]!}");
-        Console.WriteLine($"RabbitMQ_Port: {_configuration["RabbitMQ_Port"]!}");
+        Console.WriteLine($"RabbitMQ_HostName: {_configuration["RabbitMQ:HostName"]!}");
+        Console.WriteLine($"RabbitMQ_UserName: {_configuration["RabbitMQ:UserName"]!}");
+        Console.WriteLine($"RabbitMQ_Password: {_configuration["RabbitMQ:Password"]!}");
+        Console.WriteLine($"RabbitMQ_Port: {_configuration["RabbitMQ:Port"]!}");
 
-        string hostName = _configuration["RabbitMQ_HostName"]!;
-        string userName = _configuration["RabbitMQ_UserName"]!;
-        string password = _configuration["RabbitMQ_Password"]!;
-        string port = _configuration["RabbitMQ_Port"]!;
+        string hostName = _configuration["RabbitMQ:HostName"]!;
+        string userName = _configuration["RabbitMQ:UserName"]!;
+        string password = _configuration["RabbitMQ:Password"]!;
+        string port = _configuration["RabbitMQ:Port"]!;
         _logger = logger;
 
 
