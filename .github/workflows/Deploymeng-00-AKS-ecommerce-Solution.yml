@@ -36,17 +36,66 @@ jobs:
           use-kubelogin: 'true'
           
       # Deploys application based on given manifest file
-      - name: Deploys application
+      - name: Deploys MongoDb Instance
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
           namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
           manifests: ./aks/mongodb-deployment.yaml
           
-      - name: Deploys application
+      - name: Deploys MySql Instance
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
           namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
-          manifests: ./aks/mongodb-deployment.yaml
+          manifests: ./aks/mysql-deployment.yaml
+
+      - name: Deploys Postgres Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/postgres-deployment.yaml
+
+      - name: Deploys RabbitMq Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/rabbitmq-deployment.yaml
+
+      - name: Deploys Redis Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/redis-deployment.yaml
+
+      - name: Deploys User Microservice Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/users-microservice-deployment.yaml
+
+      - name: Deploys Products Microservice Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/products-microservice-deployment.yaml
+
+      - name: Deploys Orders Microservice Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/orders-microservice-deployment.yaml
+
+      - name: Deploys Api Gateway Microservice Instance
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
+          manifests: ./aks/apigateway-deployment.yaml
 
