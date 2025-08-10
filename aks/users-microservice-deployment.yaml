@@ -23,13 +23,31 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: POSTGRES_HOST
-          value: postgres
-        - name: POSTGRES_PORT
-          value: "5432"
-        - name: POSTGRES_DATABASE
-          value: eCommerceUsers
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          value: admin
+        - name: ConnectionStrings__PostgresConnection
+          value: "Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=admin;"
+        - name: RabbitMQ__HostName
+          value: rabbitmq
+        - name: RabbitMQ__Port
+          value: 5672
+        - name: RabbitMQ__UserName
+          value: guest
+        - name: RabbitMQ__Password
+          value: guest
+        - name: RabbitMQ__UsersExchange
+          value: users.exchange
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-microservice
+  namespace: ecommerce-namespace
+spec:
+  selector:
+    app: users-microservice
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+

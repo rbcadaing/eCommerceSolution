@@ -23,23 +23,31 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: MYSQL_HOST
-          value: mysql
-        - name: MYSQL_PORT
-          value: "3306"
-        - name: MYSQL_DATABASE
-          value: ecommerceproductsdatabase
-        - name: MYSQL_USER
-          value: root
-        - name: MYSQL_PASSWORD
-          value: admin
-        - name: RabbitMQ_HostName
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=mysql;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;"
+        - name: RabbitMQ__HostName
           value: rabbitmq
-        - name: RabbitMQ_Port
-          value: "5672"
-        - name: RabbitMQ_UserName
-          value: guest
-        - name: RabbitMQ_Password
-          value: guest
-        - name: RabbitMQ_Products_Exchange
-          value: products.exchange
+        - name: RabbitMQ__UserName
+          value: user
+        - name: RabbitMQ__Password
+          value: password
+        - name: RabbitMQ__Port
+          value: 5672
+        - name: RabbitMQ__ProductExchange
+          value: product.exchange
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-microservice
+  namespace: ecommerce-namespace
+spec:
+  selector:
+    app: products-microservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+
+

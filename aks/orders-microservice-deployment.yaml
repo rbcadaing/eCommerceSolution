@@ -23,33 +23,39 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: MONGODB_HOST
-          value: mongodb
-        - name: MONGODB_PORT
-          value: "27017"
-        - name: MONGODB_DATABASE
-          value: OrdersDatabase
-        - name: UsersMicroservicePort
-          value: "8080"
-        - name: UsersMicroserviceName
-          value: apigateway
-        - name: ProductsMicroservicePort
-          value: "8080"
-        - name: ProductsMicroserviceName
-          value: apigateway
-        - name: REDIS_HOST
-          value: redis
-        - name: REDIS_PORT
-          value: "6379"
-        - name: RabbitMQ_HostName
-          value: rabbitmq
-        - name: RabbitMQ_Port
+        - name: ConnectionStrings__OrderDb
+          value: "Server=postgres-container;Port=5432;Database=OrderDb;User Id=postgres;Password=admin;"
+        - name: UsersMicroserviceUrl
+          value: "apigateway"
+        - name: ProductsMicroserviceUrl
+          value: "apigateway"
+        - name: OrdersDatabaseName
+          value: "OrdersDatabase"
+        - name: ConnectionStrings__Redis
+          value: "redis:6379"
+        - name: RabbitMQ__HostName
+          value: "rabbitmq"
+        - name: RabbitMQ__UserName
+          value: "user"
+        - name: RabbitMQ__Password
+          value: "password"
+        - name: RabbitMQ__Port
           value: "5672"
-        - name: RabbitMQ_UserName
-          value: guest
-        - name: RabbitMQ_Password
-          value: guest
-        - name: RabbitMQ_Products_Exchange
-          value: products.exchange
-        - name: RabbitMQ_Users_Exchange
-          value: users.exchange
+        - name: RabbitMQ__ProductExchange
+          value: "product.exchange"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-microservice
+  namespace: ecommerce-namespace
+spec:
+  selector:
+    app: orders-microservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
