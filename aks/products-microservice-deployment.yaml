@@ -32,7 +32,7 @@ spec:
         - name: RabbitMQ__Password
           value: password
         - name: RabbitMQ__Port
-          value: 5672
+          value: "5672"
         - name: RabbitMQ__ProductExchange
           value: product.exchange
 ---
