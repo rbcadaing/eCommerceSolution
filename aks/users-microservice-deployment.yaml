@@ -37,7 +37,7 @@ spec:
           value: users.exchange
 ---
 
-apiVersion: v1
+apiVersion: apps/v1
 kind: Service
 metadata:
   name: users-microservice
