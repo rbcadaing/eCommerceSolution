@@ -28,7 +28,7 @@ spec:
         - name: RabbitMQ__HostName
           value: rabbitmq
         - name: RabbitMQ__Port
-          value: 5672
+          value: "5672"
         - name: RabbitMQ__UserName
           value: guest
         - name: RabbitMQ__Password
@@ -37,7 +37,7 @@ spec:
           value: users.exchange
 ---
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Service
 metadata:
   name: users-microservice
