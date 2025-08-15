@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: apigateway
-        image: harshaecommerceregistry.azurecr.io/apigateway:latest
+        image: rbcadaing/apigateway:latest
         ports:
         - containerPort: 8080
 
