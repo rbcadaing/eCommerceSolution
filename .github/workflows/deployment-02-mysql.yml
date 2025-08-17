@@ -43,10 +43,4 @@ jobs:
           namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
           manifests: ./aks/mysql-deployment.yaml
           
-      - name: Deploys MySql application Service
-        uses: Azure/k8s-deploy@v4
-        with:
-          action: deploy
-          namespace: ${{ vars.ECOMMERCE_AKS_NAMESPACE }}
-          manifests: ./aks/mysql.service.yaml
 
