@@ -20,7 +20,7 @@ spec:
         image: rbcadaing/ecommerce-mongodb:latest
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          vale: root
+          value: root
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: rc9562ng@@
 
