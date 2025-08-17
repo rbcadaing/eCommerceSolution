@@ -1,4 +1,4 @@
-name: Deployment-03-Nginx-Test
+name: Deployment-101-Nginx-Test
 
 on:
   workflow_dispatch:
