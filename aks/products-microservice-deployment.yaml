@@ -24,7 +24,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ConnectionStrings__DefaultConnection
-          value: "Server=mysql;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=mysqlpw;"
+          value: "Server=mysql;Port=3306;Database=ecommerceproductsdatabase;Uid=root;Pwd=admin;"
         - name: RabbitMQ__HostName
           value: rabbitmq
         - name: RabbitMQ__UserName
