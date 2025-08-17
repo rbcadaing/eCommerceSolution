@@ -10,10 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: DockerCompose@1
+- task: Docker@2
   inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'Personal_Docker_hub'
-    dockerComposeFile: 'docker-compose.build.yaml'
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'build'
+    containerRegistry: 'Personal_Docker_hub'
+    repository: 'ecommerce-mysql'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    buildContext: 'deployment/mysql'
