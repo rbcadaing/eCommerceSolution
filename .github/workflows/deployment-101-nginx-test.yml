@@ -36,7 +36,7 @@ jobs:
           use-kubelogin: 'true'
 
       # Deploys application based on given manifest file
-      - name: Deploys MySql application
+      - name: Deploys Nginx application
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
