@@ -1,4 +1,4 @@
-name: Deployment-04-AKS Ecommerce RabbitMq
+name: Deployment-04-RabbitMq
 
 on:
   workflow_dispatch:

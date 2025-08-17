@@ -1,4 +1,4 @@
-name: Deployment-08-AKS Ecommerce Users Micro Service
+name: Deployment-08-Users Micro Service
 
 on:
   workflow_dispatch:

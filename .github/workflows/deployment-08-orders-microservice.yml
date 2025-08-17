@@ -1,4 +1,4 @@
-name: Deployment-06-AKS Ecommerce Orders Micro Service
+name: Deployment-06-Orders Micro Service
 
 on:
   workflow_dispatch:

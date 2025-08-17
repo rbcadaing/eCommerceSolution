@@ -1,4 +1,4 @@
-name: Deployment-07-AKS Ecommerce Products Micro Service
+name: Deployment-07-Products Micro Service
 
 on:
   workflow_dispatch:

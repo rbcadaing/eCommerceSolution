@@ -1,5 +1,5 @@
 
-name: Build-06-eCommerce Users Service Image
+name: Build-06-Users Service Image
 
 on:
   workflow_dispatch:

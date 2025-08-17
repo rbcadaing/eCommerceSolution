@@ -1,4 +1,4 @@
-name: Deployment-09-AKS Ecommerce Api Gateway Micro Service
+name: Deployment-09-Api Gateway Micro Service
 
 on:
   workflow_dispatch:

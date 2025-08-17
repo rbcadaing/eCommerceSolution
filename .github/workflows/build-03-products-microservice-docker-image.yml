@@ -1,5 +1,5 @@
 
-name: Build-05-eCommerce Products Service Image
+name: Build-05-Products Service Image
 
 on:
   workflow_dispatch:

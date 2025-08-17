@@ -1,4 +1,4 @@
-name: Deployment-02-AKS Ecommerce Postgres
+name: Deployment-02-Postgres
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Infrastructure-02-Delete Ecommerce AKS Cluster And RG
+name: 01-Delete-Infrastructure Ecommerce AKS Cluster
 
 on:
   workflow_dispatch:

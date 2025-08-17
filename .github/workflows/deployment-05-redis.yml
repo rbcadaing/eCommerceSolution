@@ -1,4 +1,4 @@
-name: Deployment-05-AKS Ecommerce Redis
+name: Deployment-05-Redis
 
 on:
   workflow_dispatch:

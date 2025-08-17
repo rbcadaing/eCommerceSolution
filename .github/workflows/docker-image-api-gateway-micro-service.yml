@@ -1,5 +1,5 @@
 
-name: Build-07-eCommerce Api Gateway Service Image
+name: Build-07-Api Gateway Service Image
 
 on:
   workflow_dispatch:
