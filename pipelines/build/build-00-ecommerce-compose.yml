@@ -16,4 +16,4 @@ steps:
     repository: 'ecommerce-mysql'
     command: 'buildAndPush'
     Dockerfile: '/Dockerfile'
-    buildContext: './deployment/mysl'
+    buildContext: './deployment/mysql'
