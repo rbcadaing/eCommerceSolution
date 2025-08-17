@@ -22,7 +22,7 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           vale: root
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: mongopw
+          value: rc9562ng@@
 
         ports:
         - containerPort: 27017
