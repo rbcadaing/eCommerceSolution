@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -17,21 +17,9 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx-test:latest
+          image: nginx:latest
           ports:
             - containerPort: 80
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "250m"
-              memory: "256Mi"
-          securityContext:
-            runAsUser: 101
-            runAsNonRoot: true
-            readOnlyRootFilesystem: true
-
 ---
 apiVersion: v1
 kind: Service

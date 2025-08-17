@@ -18,7 +18,6 @@ spec:
       containers:
       - name: mongodb
         image: rbcadaing/ecommerce-mongodb:latest
-        command: ["mongodb", "--bind_ip_all"]
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value: root
@@ -47,7 +46,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb
+  name: mongodb-lb
   namespace: ecommerce-namespace
 spec:
   selector:
