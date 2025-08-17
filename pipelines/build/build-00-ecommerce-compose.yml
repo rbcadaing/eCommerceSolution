@@ -15,5 +15,5 @@ steps:
     containerRegistry: 'Personal_Docker_hub'
     repository: 'ecommerce-mysql'
     command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
-    buildContext: 'deployment/mysql'
+    Dockerfile: '/Dockerfile'
+    buildContext: './deployment/mysl'
