@@ -8,3 +8,6 @@ GET AKS PODS Logs: kubectl logs orders-microservice-deployment-dbc8db88c-pn8h2 -
 
 GET AKS ALL: kubectl get all --namespace ecommerce-namespace
 GET AKS Services: kubectl get services --namespace ecommerce-namespace
+
+Remote Access Container: kubectl exec -it mysql-deployment-84f9f97fdd-nlpxh --namespace ecommerce-namespace -- bash
+netstat -tuln | grep 3306
