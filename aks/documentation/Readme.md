@@ -11,3 +11,5 @@ GET AKS Services: kubectl get services --namespace ecommerce-namespace
 
 Remote Access Container: kubectl exec -it mysql-deployment-84f9f97fdd-nlpxh --namespace ecommerce-namespace -- bash
 netstat -tuln | grep 3306
+
+Get and assign podname: $podNames = kubectl get pod -name -n ecommerce-namespace --no-headers -o custom-columns=":metadata.name"
