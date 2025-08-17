@@ -15,4 +15,4 @@ steps:
     azureSubscription: 'Dentsu(cce8043b-d059-4c18-82ac-3a35dc504a2c)'
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az group delete --name $(ECOMMERCE_AKS_RG) --yes --no-wait'
+    inlineScript: 'az group delete --name $(ECOMMERCE_AKS_RG) --yes'
