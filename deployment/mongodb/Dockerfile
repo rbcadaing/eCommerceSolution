@@ -16,4 +16,3 @@ ENV MONGO_INITDB_DATABASE=OrdersDatabase
 # Expose the MongoDB port
 EXPOSE 27017
 
-CMD ["mongod", "--bind-address=0.0.0.0"]

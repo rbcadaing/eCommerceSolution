@@ -36,6 +36,6 @@ spec:
       port: 8080      # The port that will be exposed externally
       targetPort: 8080  # The port on the apigateway container
   type: LoadBalancer  # Exposes the service externally using the Azure's load balancer
-  
+
 
 

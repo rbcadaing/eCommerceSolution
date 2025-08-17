@@ -50,19 +50,19 @@ spec:
       targetPort: 8080
   type: ClusterIP
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: products-microservice-lb
-  namespace: ecommerce-namespace
-spec:
-  selector:
-    app: products-microservice
-  ports:
-    - protocol: TCP
-      port: 8080      # The port that will be exposed externally
-      targetPort: 8080  # The port on the apigateway container
-  type: LoadBalancer  # Exposes the service externally using the Azure's load balancer
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: products-microservice-lb
+#   namespace: ecommerce-namespace
+# spec:
+#   selector:
+#     app: products-microservice
+#   ports:
+#     - protocol: TCP
+#       port: 8080      # The port that will be exposed externally
+#       targetPort: 8080  # The port on the apigateway container
+#   type: LoadBalancer  # Exposes the service externally using the Azure's load balancer
 
 

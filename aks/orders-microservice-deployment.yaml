@@ -23,8 +23,8 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: ConnectionStrings__OrderDb
-          value: "Server=postgres-container;Port=5432;Database=OrderDb;User Id=postgres;Password=admin;"
+        - name: ConnectionStrings__MongoDB
+          value: mongodb://root:mongopw@mongodb-container
         - name: UsersMicroserviceUrl
           value: "apigateway"
         - name: ProductsMicroserviceUrl

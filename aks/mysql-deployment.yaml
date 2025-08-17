@@ -38,18 +38,18 @@ spec:
       targetPort: 3306
   type: ClusterIP
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-lb
-  namespace: ecommerce-namespace
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: 3306      # The port that will be exposed externally
-      targetPort: 3306  # The port on the apigateway container
-  type: LoadBalancer  # Exposes the service externally using the Azure's load balancer
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mysql-lb
+#   namespace: ecommerce-namespace
+# spec:
+#   selector:
+#     app: mysql
+#   ports:
+#     - protocol: TCP
+#       port: 3306      # The port that will be exposed externally
+#       targetPort: 3306  # The port on the apigateway container
+#   type: LoadBalancer  # Exposes the service externally using the Azure's load balancer
 

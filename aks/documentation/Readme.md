@@ -17,3 +17,10 @@ Get and assign podname: $podNames = kubectl get pod -name -n ecommerce-namespace
 az aks show --resource-group ecommerce-env-rg --name ecommerce-env-aks-cluster --query enablePrivateCluster
 
 kubectl port-forward svc/mysql-lb 3306:3306 -n ecommerce-namespace
+
+az group delete --name ecommerce-env-rg --yes
+
+docker login -u rbcadaing
+
+
+kubectl rollout restart deployment orders-microservice-deployment.yaml -n ecommerce-namespace

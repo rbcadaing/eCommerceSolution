@@ -24,7 +24,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ConnectionStrings__PostgresConnection
-          value: "Host=postgres-container:5432;Database=eCommerceUsers;User Id=postgres;Password=admin;"
+          value: "Host=postgres:5432;Database=eCommerceUsers;User Id=postgres;Password=admin;"
         - name: RabbitMQ__HostName
           value: rabbitmq
         - name: RabbitMQ__Port
