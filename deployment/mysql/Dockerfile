@@ -21,3 +21,5 @@ ENV MYSQL_ROOT_PASSWORD=admin
 
 # Expose the MySQL port
 EXPOSE 3306
+
+CMD ["mysqld", "--bind-address=0.0.0.0"]

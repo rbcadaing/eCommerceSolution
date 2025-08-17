@@ -15,3 +15,5 @@ netstat -tuln | grep 3306
 Get and assign podname: $podNames = kubectl get pod -name -n ecommerce-namespace --no-headers -o custom-columns=":metadata.name"
 
 az aks show --resource-group ecommerce-env-rg --name ecommerce-env-aks-cluster --query enablePrivateCluster
+
+kubectl port-forward svc/mysql-lb 3306:3306 -n ecommerce-namespace
