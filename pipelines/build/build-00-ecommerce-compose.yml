@@ -10,10 +10,19 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Docker@2
+- task: AzureCLI@2
   inputs:
-    containerRegistry: 'Personal_Docker_hub'
-    repository: 'ecommerce-mysql'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-    buildContext: './deployment/mysql'
+    azureSubscription: 'Dentsu(cce8043b-d059-4c18-82ac-3a35dc504a2c)'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group create --name '$(ECOMMERCE_AKS_RG)' --location '$(ECOMMERCE_AKS_RG_REGION)'
+                az provider register --namespace Microsoft.Insights --wait
+                az provider register --namespace Microsoft.OperationalInsights --wait
+                az provider register --namespace Microsoft.ContainerService --wait
+                az provider register --namespace Microsoft.Network --wait
+                az provider register --namespace Microsoft.Compute --wait
+                az provider register --namespace Microsoft.OperationsManagement --wait
+                az provider register --namespace Microsoft.Authorization --wait
+                az provider register --namespace Microsoft.Storage --wait;
+                az aks create --resource-group '$(ECOMMERCE_AKS_RG)' --name '$(ECOMMERCE_AKS_CLUSTER_NAME)' --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
