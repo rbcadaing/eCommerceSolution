@@ -1,0 +1,27 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+   
+    - script: |
+        docker login -u rbcadaing -p $(docker_pw)
+        docker build -t rbcadaing/ecommerce-mysql:latest .
+        docker push rbcadaing/ecommerce-mysql:latest
+      workingDirectory: '$(Build.SourcesDirectory)/deployment/mysql'
+      displayName: "Run script in subfolder"
+
