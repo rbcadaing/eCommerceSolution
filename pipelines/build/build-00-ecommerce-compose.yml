@@ -8,6 +8,9 @@ parameters:
     type: boolean
     default: false
 
+variables:
+  - name: setup
+    value: ${{ parameters.setupAKSCluster }}
 
 steps:
 - task: AzureCLI@2
@@ -16,4 +19,4 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
     scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/setup_ecommerce_environment.ps1'
-    arguments: '--Create $${{parameters.setupAKSCluster}}'
+    arguments: '-Create $$(setup)'
