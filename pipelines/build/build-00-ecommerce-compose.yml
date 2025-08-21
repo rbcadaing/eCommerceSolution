@@ -2,6 +2,8 @@
 pool:
   vmImage: ubuntu-latest
 
+
+
 parameters:
   - name: setupAKSCluster
     displayName: 'Setup Azure AKS Cluster'
@@ -11,6 +13,7 @@ parameters:
 variables:
   - name: setup
     value: ${{ parameters.setupAKSCluster }}
+  - group: docker-hub
 
 steps:
 - task: AzureCLI@2
@@ -19,4 +22,4 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
     scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/setup_ecommerce_environment.ps1'
-    arguments: '-Create $$(setup)'
+    arguments: '-Create $$(setup) -clusterName $(ECOMMERCE_AKS_CLUSTER_NAME) -envRG $(ECOMMERCE_AKS_RG) -envRGLocation $(ECOMMERCE_AKS_RG_REGION)'
