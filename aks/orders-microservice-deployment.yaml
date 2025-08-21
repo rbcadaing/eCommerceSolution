@@ -24,11 +24,11 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ConnectionStrings__MongoDB
-          value: mongodb://root:mongopw@mongodb-container
+          value: mongodb://root:mongopw@mongodb
         - name: UsersMicroserviceUrl
-          value: "apigateway"
+          value: "http://apigateway:8080"
         - name: ProductsMicroserviceUrl
-          value: "apigateway"
+          value: "http://apigateway:8080"
         - name: OrdersDatabaseName
           value: "OrdersDatabase"
         - name: ConnectionStrings__Redis
