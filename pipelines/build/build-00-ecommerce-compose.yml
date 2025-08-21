@@ -4,7 +4,7 @@ pool:
 
 parameters:
   - name: setupAKSCluster
-    displayName: 'Run cleanup after deployment?'
+    displayName: 'Setup Azure AKS Cluster'
     type: boolean
     default: false
 
