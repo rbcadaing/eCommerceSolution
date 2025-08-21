@@ -31,7 +31,7 @@ stages:
         script: |
           docker build -t ecommerce-mongodb:latest '$(Build.SourcesDirectory)/deployment/mongodb'
           docker images
-          #docker tag ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:latest
+          docker tag ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:latest
     - task: Docker@2
       displayName: Push to Docker Hub
       inputs:
