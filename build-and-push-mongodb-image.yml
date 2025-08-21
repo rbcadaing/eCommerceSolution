@@ -1,0 +1,24 @@
+
+resources:
+- repo: self
+
+variables:
+  - group: docker-hub
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+   
+    - script: |
+        docker login -u rbcadaing -p $(docker_pw)
+        docker build -t rbcadaing/ecommerce-mongodb:latest .
+        docker push rbcadaing/ecommerce-mongodb:latest
+      workingDirectory: '$(Build.SourcesDirectory)/deployment/mongodb'
+      displayName: "Run script in subfolder"
+

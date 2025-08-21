@@ -1,28 +1,22 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- main
 
 pool:
   vmImage: ubuntu-latest
+
+parameters:
+  - name: setupAKSCluster
+    displayName: 'Setup Azure AKS Cluster'
+    type: boolean
+    default: false
+
+variables:
+  - name: setup
+    value: ${{ parameters.setupAKSCluster }}
 
 steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Dentsu(cce8043b-d059-4c18-82ac-3a35dc504a2c)'
     scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az group create --name '$(ECOMMERCE_AKS_RG)' --location '$(ECOMMERCE_AKS_RG_REGION)'
-                az provider register --namespace Microsoft.Insights --wait
-                az provider register --namespace Microsoft.OperationalInsights --wait
-                az provider register --namespace Microsoft.ContainerService --wait
-                az provider register --namespace Microsoft.Network --wait
-                az provider register --namespace Microsoft.Compute --wait
-                az provider register --namespace Microsoft.OperationsManagement --wait
-                az provider register --namespace Microsoft.Authorization --wait
-                az provider register --namespace Microsoft.Storage --wait;
-                az aks create --resource-group '$(ECOMMERCE_AKS_RG)' --name '$(ECOMMERCE_AKS_CLUSTER_NAME)' --node-count 1 --node-vm-size Standard_B2s --enable-addons monitoring --generate-ssh-keys
+    scriptLocation: 'scriptPath'
+    scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/setup_ecommerce_environment.ps1'
+    arguments: '-Create $$(setup)'
