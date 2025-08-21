@@ -21,7 +21,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'Personal_Docker_hub'
-        repository: 'rbcadaing/ecommerce-mongodb'
+        repository: 'ecommerce-mongodb'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/deployment/mongodb/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/deployment/mongodb'
