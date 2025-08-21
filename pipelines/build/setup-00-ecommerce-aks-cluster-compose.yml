@@ -2,8 +2,6 @@
 pool:
   vmImage: ubuntu-latest
 
-
-
 parameters:
   - name: setupAKSCluster
     displayName: 'Setup Azure AKS Cluster'
