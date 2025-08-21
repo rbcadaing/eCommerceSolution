@@ -22,4 +22,4 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
     scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/setup_ecommerce_environment.ps1'
-    arguments: '-Create $$(setup) -clusterName $(ECOMMERCE_AKS_CLUSTER_NAME) -envRG $(ECOMMERCE_AKS_RG) -envRGLocation $(ECOMMERCE_AKS_RG_REGION)'
+    arguments: "-Create $$(setup) -clusterName $(ECOMMERCE_AKS_CLUSTER_NAME) -envRG $(ECOMMERCE_AKS_RG) -envRGLocation $(ECOMMERCE_AKS_RG_REGION)"
