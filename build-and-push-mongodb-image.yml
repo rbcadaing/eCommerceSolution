@@ -1,12 +1,9 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
-trigger:
-- main
 
 resources:
 - repo: self
+
+variables:
+  - group: docker-hub
 
 stages:
 - stage: Build
