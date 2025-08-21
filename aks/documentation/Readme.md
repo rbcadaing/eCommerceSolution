@@ -24,3 +24,10 @@ docker login -u rbcadaing
 
 
 kubectl rollout restart deployment orders-microservice-deployment.yaml -n ecommerce-namespace
+
+Rolling Update: pulls the latest image then create a pod performs health check and delete the old pod once everything is in place
+kubectl rollout restart <pod name> --namespace ecommerce-namespace
+
+Create RabbitMq Base64String credentials using powershell
+[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('user'))
+[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('password'))

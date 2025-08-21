@@ -36,9 +36,15 @@ spec:
         - name: RabbitMQ__HostName
           value: "rabbitmq"
         - name: RabbitMQ__UserName
-          value: "user"
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: rabbitmq_username
         - name: RabbitMQ__Password
-          value: "password"
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: rabbitmq_password
         - name: RabbitMQ__Port
           value: "5672"
         - name: RabbitMQ__ProductExchange
