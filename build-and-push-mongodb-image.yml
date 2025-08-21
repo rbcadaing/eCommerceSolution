@@ -23,5 +23,5 @@ stages:
         containerRegistry: 'Personal_Docker_hub'
         repository: 'rbcadaing/ecommerce-mongodb'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/deployment/mongodb/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/deployment/mongodb'
