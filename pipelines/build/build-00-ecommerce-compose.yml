@@ -16,4 +16,4 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'scriptPath'
     scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/setup_ecommerce_environment.ps1'
-    arguments: '--Create ${{parameters.setupAKSCluster}}'
+    arguments: '--Create $${{parameters.setupAKSCluster}}'
