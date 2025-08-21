@@ -17,11 +17,10 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    
+    - script: |
+        docker build -t rbcadaing/ecommerce-mongodb:latest .
+        docker push rbcadaing/ecommerce-mongodb:latest
+      workingDirectory: '$(Build.SourcesDirectory)/deployment/mongodb'
+      displayName: "Run script in subfolder"
 
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Personal_Docker_hub'
-        repository: 'ecommerce-mongodb'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/deployment/mongodb/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/deployment/mongodb'
