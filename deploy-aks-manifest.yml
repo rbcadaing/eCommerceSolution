@@ -1,0 +1,15 @@
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: docker-hub
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Dentsu(cce8043b-d059-4c18-82ac-3a35dc504a2c)'
+    scriptType: 'pscore'
+    scriptLocation: 'scriptPath'
+    scriptPath: '$(Build.SourcesDirectory)/aks/scripts/starter/deploy_ecommerce_solution.ps1'
+    arguments: '-clusterName $(ECOMMERCE_AKS_CLUSTER_NAME) -envRG $(ECOMMERCE_AKS_RG) -namespace $(ECOMMERCE_AKS_NAMESPACE)'
