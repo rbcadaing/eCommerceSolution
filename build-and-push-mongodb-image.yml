@@ -29,7 +29,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker build -t ecommerce-mongodb:latest '$(Build.SourcesDirectory)/deployment/mongodb/Dockerfile'
+          docker build -t ecommerce-mongodb:latest '$(Build.SourcesDirectory)/deployment/mongodb/
           docker images
           #docker tag ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:latest
     - task: Docker@2
