@@ -1,6 +1,5 @@
 
 param (
-    [bool]$Create=$true,
     [string]$clusterName="ecommerce-env-aks-cluster",
     [string]$envRG = "ecommerce-env-rg",
     [string]$namespace = "ecommerce-namespace"
