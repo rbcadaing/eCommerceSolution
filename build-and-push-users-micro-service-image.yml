@@ -1,0 +1,25 @@
+
+resources:
+- repo: self
+
+variables:
+  - group: docker-hub
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+   
+    - script: |
+        docker login -u rbcadaing -p $(docker_pw)
+        docker docker compose -f docker-compose.build.yaml build users-microservice
+        docker docker compose -f docker-compose.build.yaml push users-microservice
+        #docker push rbcadaing/ecommerce-mysql:latest
+      workingDirectory: '$(Build.SourcesDirectory)'
+      displayName: "Build And Push Users Microservice"
+
