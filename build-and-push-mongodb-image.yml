@@ -17,7 +17,11 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Personal_Docker_hub'
+        command: 'login'
+        
     - script: |
         docker build -t rbcadaing/ecommerce-mongodb:latest .
         docker push rbcadaing/ecommerce-mongodb:latest
