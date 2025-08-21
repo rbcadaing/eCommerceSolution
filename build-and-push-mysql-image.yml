@@ -8,6 +8,9 @@ trigger:
 resources:
 - repo: self
 
+variables:
+  - group: docker-hub
+
 stages:
 - stage: Build
   displayName: Build image
