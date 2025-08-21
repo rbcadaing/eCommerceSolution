@@ -1,14 +1,10 @@
-#az login --tenant e80ac3e5-e681-46f9-b730-1c91e4c5b57a
-#az account set --subscription cce8043b-d059-4c18-82ac-3a35dc504a2c
 
 param (
-    [bool]$Create=$true
+    [bool]$Create=$true,
+    [string]$clusterName="ecommerce-env-aks-cluster",
+    [string]$envRG = "ecommerce-env-rg",
+    [string]$envRGLocation = "westus"
 )
-
-
-$envRG = 'ecommerce-env-rg'
-$envRGLocation = "westus"
-$clusterName = "ecommerce-env-aks-cluster"
 
 if ($Create) {
      Write-Host "Creating AKS Cluster..."
