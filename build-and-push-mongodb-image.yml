@@ -31,5 +31,5 @@ stages:
       displayName: Push to Docker Hub
       inputs:
         containerRegistry: 'Personal_Docker_hub'
-        repository: 'mongodb'
+        repository: 'rbcadaing/ecommerce-mongodb'
         command: 'push'
