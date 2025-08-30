@@ -10,23 +10,6 @@ variables:
     value: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-   
-    - script: |
-        docker login -u rbcadaing -p $(docker_pw)
-        docker compose -f docker-compose.build.yaml build products-microservice
-        docker tag rbcadaing/products-microservice:latest rbcadaing/products-microservice:$(tag)
-        docker image ls
-        docker push rbcadaing/products-microservice:$(tag)
-      workingDirectory: '$(Build.SourcesDirectory)'
-      displayName: "Build And Push Products Microservice"
 
 - stage: Test
   displayName: Test Product Service
@@ -52,6 +35,10 @@ stages:
       inputs:
         solution: '$(Build.SourcesDirectory)/eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln'
         vsVersion: '17.0'
+        msbuildArgs: '/p:Configuration:Release'
+        platform: 'Any CPU'
+        configuration: 'Release'
+        msbuildArchitecture: 'x64'
 
     - task: VSTest@3
       inputs:
@@ -60,4 +47,22 @@ stages:
         testAssemblyVer2: |
           **\bin\**\*test.dll
           **\bin\**\*tests.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)/$(Build.SourcesDirectory)/eCommerceSolution.ProductsService'
+        searchFolder: '$(System.DefaultWorkingDirectory)/eCommerceSolution.ProductsService'
+
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+   
+    - script: |
+        docker login -u rbcadaing -p $(docker_pw)
+        docker compose -f docker-compose.build.yaml build products-microservice
+        docker tag rbcadaing/products-microservice:latest rbcadaing/products-microservice:$(tag)
+        docker image ls
+        docker push rbcadaing/products-microservice:$(tag)
+      workingDirectory: '$(Build.SourcesDirectory)'
+      displayName: "Build And Push Products Microservice"
