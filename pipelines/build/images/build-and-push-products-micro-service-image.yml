@@ -36,7 +36,7 @@ stages:
         solution: '$(Build.SourcesDirectory)/eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln'
         vsVersion: '17.0'
         platform: 'Any CPU'
-        configuration: 'Release'
+        configuration: 'Debug'
         msbuildArchitecture: 'x64'
 
     - task: VSTest@3
