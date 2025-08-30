@@ -21,7 +21,7 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker compose -f docker-compose.build.yaml build apigateway-microservice
-        docker tag rbcadaing/apigateway rbcadaing/apigateway:$(tag)
+        docker tag rbcadaing/apigateway:latest rbcadaing/apigateway:$(tag)
         docker image ls
         docker push rbcadaing/apigateway:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
