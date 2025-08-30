@@ -35,7 +35,6 @@ stages:
       inputs:
         solution: '$(Build.SourcesDirectory)/eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln'
         vsVersion: '17.0'
-        msbuildArgs: '/p:Configuration:Release'
         platform: 'Any CPU'
         configuration: 'Release'
         msbuildArchitecture: 'x64'
