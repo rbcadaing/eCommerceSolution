@@ -4,7 +4,11 @@ resources:
 
 variables:
   - group: docker-hub
-
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+    
 stages:
 - stage: Build
   displayName: Build image
@@ -18,8 +22,9 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker compose -f docker-compose.build.yaml build users-microservice
-        docker compose -f docker-compose.build.yaml push users-microservice
-        #docker push rbcadaing/ecommerce-mysql:latest
+        docker tag rbcadaing/users-microservice:latest rbcadaing/users-microservice:$(tag)
+        docker image ls
+        docker push rbcadaing/users-microservice:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
       displayName: "Build And Push Users Microservice"
 
