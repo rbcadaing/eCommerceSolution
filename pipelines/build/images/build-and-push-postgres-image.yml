@@ -4,7 +4,11 @@ resources:
 
 variables:
   - group: docker-hub
-
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+    
 stages:
 - stage: Build
   displayName: Build image
@@ -18,7 +22,9 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker build -t rbcadaing/ecommerce-postgres:latest .
-        docker push rbcadaing/ecommerce-postgres:latest
+        docker tag rbcadaing/ecommerce-postgres:latest rbcadaing/ecommerce-postgres:$(tag)
+        docker image ls
+        docker push rbcadaing/ecommerce-postgres:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)/deployment/postgres'
       displayName: "Build and Push Image to Docker Hub"
 
