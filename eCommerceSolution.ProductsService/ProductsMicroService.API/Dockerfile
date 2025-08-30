@@ -16,6 +16,7 @@ COPY ["eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln",
 COPY ["eCommerceSolution.ProductsService/ProductsMicroService.API/ProductsMicroService.API.csproj", "ProductsMicroService.API/ProductsMicroService.API.csproj"]
 COPY ["eCommerceSolution.ProductsService/BusinessLogicLayer/BusinessLogicLayer.csproj", "BusinessLogicLayer/BusinessLogicLayer.csproj"]
 COPY ["eCommerceSolution.ProductsService/DataAccessLayer/DataAccessLayer.csproj", "DataAccessLayer/DataAccessLayer.csproj"]
+COPY ["eCommerceSolution.ProductsService/ProductsUnitTests/ProductsUnitTests.csproj", "ProductsUnitTests/ProductsUnitTests.csproj"]
 RUN dotnet restore "eCommerceSolution.ProductsService.sln"
 
 COPY ["eCommerceSolution.ProductsService/ProductsMicroService.API", "ProductsMicroService.API"]
