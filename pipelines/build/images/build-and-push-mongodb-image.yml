@@ -18,7 +18,9 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker build -t rbcadaing/ecommerce-mongodb:latest .
-        docker push rbcadaing/ecommerce-mongodb:latest
+        docker tag rbcadaing/ecommerce-mongodb:latest rbcadaing/ecommerce-mongodb:$(tag)
+        docker image ls
+        docker push rbcadaing/ecommerce-mongodb:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)/deployment/mongodb'
       displayName: "Run script in subfolder"
 
