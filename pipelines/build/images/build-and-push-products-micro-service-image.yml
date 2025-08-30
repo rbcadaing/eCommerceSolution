@@ -16,7 +16,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(vmImageName)
     steps:
    
     - script: |
@@ -28,3 +28,36 @@ stages:
       workingDirectory: '$(Build.SourcesDirectory)'
       displayName: "Build And Push Products Microservice"
 
+- stage: Test
+  displayName: Test Product Service
+  jobs:
+  - job: Test_Products_Service
+    displayName: Run and execute products service test
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - checkout: self
+      displayName: Checkout source code
+    - task: NuGetToolInstaller@1
+      displayName: Install Nuget 
+      inputs:
+        versionSpec: 
+    - task: NuGetCommand@2
+      displayName: Nuget Restore Packages
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(Build.SourcesDirectory)/eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln'
+        feedsToUse: 'select'
+    - task: VSBuild@1
+      inputs:
+        solution: '$(Build.SourcesDirectory)/eCommerceSolution.ProductsService/eCommerceSolution.ProductsService.sln'
+        vsVersion: '17.0'
+
+    - task: VSTest@3
+      inputs:
+        azureSubscription: 'Dentsu(cce8043b-d059-4c18-82ac-3a35dc504a2c)'
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\bin\**\*test.dll
+          **\bin\**\*tests.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)/$(Build.SourcesDirectory)/eCommerceSolution.ProductsService'
