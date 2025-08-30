@@ -8,6 +8,8 @@ variables:
     value: '$(Build.BuildId)'
   - name: vmImageName
     value: 'ubuntu-latest'
+  - name: aksNameSpace
+    value: 'dev'
 
 stages:
 
@@ -50,6 +52,7 @@ stages:
 
 - stage: Build
   displayName: Build image
+  dependsOn: Test
   jobs:
   - job: Build
     displayName: Build
@@ -65,3 +68,22 @@ stages:
         docker push rbcadaing/products-microservice:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
       displayName: "Build And Push Products Microservice"
+
+- stage: DeployToDev
+  displayName: Deploy Product Microservice to dev
+  dependsOn: Build
+  condition: and(succeeded('Build'),eq(variables['Build.SourceBranch'],'ref/heads/dev'))
+  jobs:
+  - deployment: DeployToDev
+    displayName: Deploy To Dev Environment
+    environment: dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - checkout: self
+
+            - script: |
+                echo "Listing contents of k8s"
+                ls -l $(Build.SourcesDirectory)/aks/
+              displayName: List aks manifest files
