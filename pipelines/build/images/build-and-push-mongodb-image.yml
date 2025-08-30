@@ -4,7 +4,11 @@ resources:
 
 variables:
   - group: docker-hub
-
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+    
 stages:
 - stage: Build
   displayName: Build image
