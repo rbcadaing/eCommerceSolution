@@ -4,6 +4,10 @@ resources:
 
 variables:
   - group: docker-hub
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -12,13 +16,15 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(vmImageName)
     steps:
    
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker compose -f docker-compose.build.yaml build orders-microservice
-        docker compose -f docker-compose.build.yaml push orders-microservice
+        docker tag rbcadaing/orders-microservice:latest rbcadaing/orders-microservice:$(tag)
+        docker image ls
+        docker push rbcadaing/orders-microservice:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
       displayName: "Build And Push Orders Microservice"
 
