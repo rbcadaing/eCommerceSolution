@@ -5,7 +5,7 @@ resources:
 variables:
   - group: docker-hub
   - name: tag
-    value: '$(Build.BuidId)'
+    value: '$(Build.BuildId)'
   - name: vmImageName
     value: 'ubuntu-latest'
 
@@ -21,9 +21,9 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker compose -f docker-compose.build.yaml build apigateway-microservice
-        docker tag rbcadaing/apigateway:latest rbcadaing/apigateway:$[ variables['tag'] ]
+        docker tag rbcadaing/apigateway:latest rbcadaing/apigateway:$(tag)
         docker image ls
-        docker push rbcadaing/apigateway:$[ variables['tag'] ]
+        docker push rbcadaing/apigateway:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
       displayName: "Build And Push Api Gateway Microservice"
 
