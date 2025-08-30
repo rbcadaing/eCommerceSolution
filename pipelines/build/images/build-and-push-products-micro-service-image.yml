@@ -77,7 +77,7 @@ stages:
 - stage: DeployToDev
   displayName: Deploy Product Microservice to dev
   dependsOn: Build
-  condition: and(succeeded('Build'),eq(variables['Build.SourceBranch'],'ref/heads/dev'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
   jobs:
   - deployment: DeployToDev
     displayName: Deploy To Dev Environment
