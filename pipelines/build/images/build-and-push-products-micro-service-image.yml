@@ -1,4 +1,9 @@
 
+trigger:
+  branches:
+    include:
+      - develop
+
 resources:
 - repo: self
 
