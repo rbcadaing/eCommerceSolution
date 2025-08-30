@@ -15,6 +15,10 @@ variables:
     value: 'ubuntu-latest'
   - name: aksNameSpace
     value: 'dev'
+  - name:  aksClusterName
+    value: 'ecommerce-env-aks-cluster'
+  - name: deploymentFile
+    value: '$(Build.SourceDirectory)/aks/products-microservice-deployment.yaml'
 
 stages:
 
@@ -92,3 +96,16 @@ stages:
                 echo "Listing contents of k8s"
                 ls -l $(Build.SourcesDirectory)/aks/
               displayName: List aks manifest files
+            
+            - script: |
+                sed -i 's/__TAG__/$(tag)/g' $(deploymentFile)
+              displayName: Replace image tag in the yaml file
+
+            - task: Kubernetes@1
+              displayName: deploy to aks cluster
+              inputs:
+                kubernetesServiceEndpoint: dev-ecommerce-env-aks-cluster-dev-1756561544493
+                kubernetesCluster: $(aksClusterName)
+                namespace: 'dev'
+                command: apply
+                arguments: '-f $(deploymentFile)'
