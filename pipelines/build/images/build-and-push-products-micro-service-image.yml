@@ -22,7 +22,7 @@ stages:
     - script: |
         docker login -u rbcadaing -p $(docker_pw)
         docker compose -f docker-compose.build.yaml build products-microservice
-        docker tag rbcadaing/products-microservice:latest rbcadaing/apigproducts-microserviceateway:$(tag)
+        docker tag rbcadaing/products-microservice:latest rbcadaing/products-microserviceateway:$(tag)
         docker image ls
         docker push rbcadaing/products-microservice:$(tag)
       workingDirectory: '$(Build.SourcesDirectory)'
